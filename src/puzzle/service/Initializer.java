@@ -17,13 +17,13 @@ import puzzle.view.PuzzleView;
  */
 public class Initializer {
     
-    public List<int []> initializeSearch(){
-        int [] initialPuzzle = {
-            1,2,0,
-            3,4,5,
-            6,7,8
-        };
-        
+    public List<int []> initializeSearch(int[] initialPuzzle){
+//        int [] initialPuzzle = {
+//            1,2,0,
+//            3,4,5,
+//            6,7,8
+//        };
+//        
         Node node = new Node(initialPuzzle);
         Search search = new Search();
         List<Node> solution = search.breadthFirstSearch(node);

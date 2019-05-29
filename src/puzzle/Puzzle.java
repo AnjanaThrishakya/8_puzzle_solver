@@ -15,8 +15,6 @@ import puzzle.view.PuzzleView;
 public class Puzzle {
     
     public static void main(String[] args) {
-        //Initializer initializer = new Initializer();
-        //initializer.initializeSearch();
         new PuzzleView().setVisible(true);
     }
     

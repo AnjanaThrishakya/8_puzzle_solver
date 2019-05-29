@@ -8,7 +8,9 @@ package puzzle.view;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -251,7 +253,7 @@ public class PuzzleView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void shuffleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shuffleButtonActionPerformed
-        // TODO add your handling code here:
+        shuffle();
     }//GEN-LAST:event_shuffleButtonActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
@@ -330,7 +332,8 @@ public class PuzzleView extends javax.swing.JFrame {
 
     }
 
-    public void setResults(int[] result) {
+    public void setResults(Integer[] result) {
+        System.out.println(Arrays.toString(result));
         this.button_0.setText(Integer.toString(result[0]));
         this.button_1.setText(Integer.toString(result[1]));
         this.button_2.setText(Integer.toString(result[2]));
@@ -342,51 +345,46 @@ public class PuzzleView extends javax.swing.JFrame {
         this.button_8.setText(Integer.toString(result[8]));
     }
 
-//    private void run() {
-//        int[] initialPuzzle = {
-//            1, 2, 0,
-//            3, 4, 5,
-//            6, 7, 8
-//        };
-//        
-//        for (int i = 0; i < initialPuzzle.length; i++) {
-//            this.buttons[i].setText(Integer.toString(initialPuzzle[i]));
-//        }
-//        
-//        int[] targetPuzzle = {
-//            0, 1, 2,
-//            3, 5, 4,
-//            6, 7, 8
-//        };
-//
-//        Node node = new Node(targetPuzzle, initialPuzzle, this);
-//        Search search = new Search();
-//
-//        List<Node> solution = search.breadthFirstSearch(node);
-//
-//        if (solution.size() > 0) {
-//            for (int i = 0; i < solution.size(); i++) {
-//                solution.get(i).printPuzzle();
-//            }
-//        } else {
-//            System.out.println("No path to solution");
-//        }
-//    }
     private void nextMove() {
         Initializer initializer = new Initializer();
-        List<int[]> array = initializer.initializeSearch();
+        List<int[]> array = initializer.initializeSearch(getPuzzle());
 
         try {
             int nextStep[] = array.get(1);
             for (int i = 0; i < nextStep.length; i++) {
-                if(nextStep[i] == 0){
+                if (nextStep[i] == 0) {
                     buttons[i].setBackground(Color.red);
                 }
             }
-            
+
         } catch (Exception e) {
-            
+
         }
 
+    }
+
+    private void shuffle() {
+        Integer[] arr = new Integer[9];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = i;
+        }
+        Collections.shuffle(Arrays.asList(arr));
+        setResults(arr);
+    }
+
+    private int getValue() {
+        Random r = new Random();
+        return r.nextInt(9);
+    }
+    
+    private int [] getPuzzle(){
+        int [] arr = new int[9];
+        
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = Integer.parseInt(buttons[i].getText());
+        }
+        
+        return arr;
+        
     }
 }

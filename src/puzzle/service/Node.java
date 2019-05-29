@@ -150,7 +150,7 @@ public class Node {
     public void expandMove() {
         for (int i = 0; i < this.puzzle.length; i++) {
             if (puzzle[i] == 0) {
-                System.out.println("I = " + i + " puzzle " + puzzle[i]);
+                //System.out.println("I = " + i + " puzzle " + puzzle[i]);
                 this.x = i;
             }
             moveToDown(this.puzzle, x);
